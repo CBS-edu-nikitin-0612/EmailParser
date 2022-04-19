@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace EmailParser
 {
@@ -36,8 +37,12 @@ namespace EmailParser
                     emailsList.Add(item);
                 }
             }
-
+            
             return emailsList;
+        }
+        public async Task<List<string>> GetEmailsAsync()
+        {
+            return await Task<List<string>>.Factory.StartNew(GetEmails);
         }
     }
 }

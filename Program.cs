@@ -2,6 +2,8 @@
 using System.Text;
 using System.IO;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace EmailParser
 {
@@ -28,8 +30,23 @@ namespace EmailParser
                 }
             }
 
-            EmailWriterToFile.SearchEmailsFromEmlFilesInDirectory(directory);
+            Task task = SearchEmailsFromEmlFilesInDirectory.EmailWriterToFileAsync(directory);
             
+            while (!task.IsCompleted)
+            {
+                Console.Clear();
+                Console.SetCursorPosition(0, 0);
+                Console.Write("in progress");
+                Thread.Sleep(500);
+                if (!task.IsCompleted)
+                    Console.Write(" . ");
+                Thread.Sleep(500);
+                if (!task.IsCompleted)
+                    Console.Write(" . ");
+                Thread.Sleep(500);
+                if (!task.IsCompleted)
+                    Console.Write(" . ");
+            }
             Console.ReadKey();
         }
 
