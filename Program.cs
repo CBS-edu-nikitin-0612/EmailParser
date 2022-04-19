@@ -38,14 +38,14 @@ namespace EmailParser
                 Console.SetCursorPosition(0, 0);
                 Console.Write("in progress");
                 Thread.Sleep(500);
-                if (!task.IsCompleted)
-                    Console.Write(" . ");
+                if (task.IsCompleted) break;
+                Console.Write(" . ");
                 Thread.Sleep(500);
-                if (!task.IsCompleted)
-                    Console.Write(" . ");
+                if (task.IsCompleted) break;
+                Console.Write(" . ");
                 Thread.Sleep(500);
-                if (!task.IsCompleted)
-                    Console.Write(" . ");
+                if (task.IsCompleted) break;
+                Console.Write(" . ");
             }
             Console.ReadKey();
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace EmailParser
 {
@@ -12,6 +13,9 @@ namespace EmailParser
             DirectoryInfo dir = directory as DirectoryInfo;
             StreamWriter mailsTxtWriter = new StreamWriter("mails.txt", false);
             StreamWriter notFoundTxtWriter = new StreamWriter("notFound.txt", false);
+
+            string pattern = @".amazonses.com";
+            var regex = new Regex(pattern);
 
             FileInfo[] emlFiles = dir.GetFiles("*.eml");
             if (emlFiles.Length == 0)
@@ -31,7 +35,8 @@ namespace EmailParser
                     {
                         foreach (var email in emails)
                         {
-                            mailsTxtWriter.WriteLine(email);
+                            if (!regex.IsMatch(email))
+                                mailsTxtWriter.WriteLine(email);
                         }
                     }
                     else
